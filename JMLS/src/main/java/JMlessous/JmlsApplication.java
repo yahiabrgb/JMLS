@@ -8,7 +8,7 @@ public class JmlsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JmlsApplication.class, args);
-		int s;
+
 	}
 
 }
