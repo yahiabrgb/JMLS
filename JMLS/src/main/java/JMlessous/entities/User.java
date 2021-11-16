@@ -1,26 +1,29 @@
 package JMlessous.entities;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 
 			@UniqueConstraint(columnNames = "username"),
 			@UniqueConstraint(columnNames = "email") 
 		})
-public class User {
+public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotBlank
 	@Size(max = 20)
+	@Column(unique=true)
 	private String username;
 
 	@NotBlank
@@ -30,7 +33,36 @@ public class User {
 
 	@NotBlank
 	@Size(max = 120)
+	@Column(name="Password")
 	private String password;
+	
+	@NotBlank
+	@Size(max = 20)
+	@Column(name="First_name")
+	private String firstname;
+	
+	@NotBlank
+	@Size(max = 20)
+	@Column(name="Last_name")
+	private String lastname;
+	
+	@NotBlank
+	@Temporal(TemporalType.DATE)
+	@Column(name="Birthdate")
+	private Date birthdate;
+	
+	@NotBlank
+	@Size(max = 8)
+	@Column(name="CIN",unique=true)
+	private int cin;
+	
+	@NotBlank
+	@Size(max = 13)
+	@Column(name="Phone_Number",unique=true)
+	private int phonenumber;
+	
+	@Column(name="Salary")
+	private float salary;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -77,6 +109,54 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public int getCin() {
+		return cin;
+	}
+
+	public void setCin(int cin) {
+		this.cin = cin;
+	}
+
+	public int getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(int phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public float getSalary() {
+		return salary;
+	}
+
+	public void setSalary(float salary) {
+		this.salary = salary;
 	}
 
 	public Set<Role> getRoles() {
