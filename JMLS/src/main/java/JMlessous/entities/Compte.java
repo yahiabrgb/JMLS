@@ -36,12 +36,14 @@ public class Compte implements Serializable{
 	@Column(name="Date_de_creation")
 	private Date datedecreation;
 	
+	@Column(name="Devise", unique = true)
+	private String devise;
 	
 	@Column(name="RIB", unique = true)
 	private String rib;
 	
 	@Column(name="Etat")
-	private String etat;
+	private Boolean etat;
 	
 
 	@JsonIgnore
@@ -82,6 +84,14 @@ public class Compte implements Serializable{
 	}
 
 
+	public String getDevise() {
+		return devise;
+	}
+
+	public void setDevise(String devise) {
+		this.devise = devise;
+	}
+
 	public String getRib() {
 		return rib;
 	}
@@ -90,11 +100,11 @@ public class Compte implements Serializable{
 		this.rib = rib;
 	}
 
-	public String getEtat() {
+	public Boolean getEtat() {
 		return etat;
 	}
 
-	public void setEtat(String etat) {
+	public void setEtat(Boolean etat) {
 		this.etat = etat;
 	}
 
