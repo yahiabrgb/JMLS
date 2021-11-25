@@ -16,4 +16,10 @@ public interface ICompteService {
 
 	Compte RetrieveCompte(String id);
 
+	List<Compte> RetrieveActiveUserComptes(Long id);
+
+	Compte UpdateCompteRate(Compte c, float rate);
+
+	void AssignCompte(long compteid, long userid);
+
 }

@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import JMlessous.entities.Compte;
+
+import JMlessous.entities.*;
 import JMlessous.repositories.*;
 
 
@@ -47,5 +48,25 @@ public class CompteService implements ICompteService{
 		return c;
 	}
 	
-
+	@Override
+	public List<Compte> RetrieveActiveUserComptes(Long id) {
+		return CompteRepository.RetrieveActiveUserComptes(id);
+	}
+	
+	@Override
+	public Compte UpdateCompteRate(Compte c,float rate) {
+		Compte cpt = CompteRepository.findById(c.getIdcompte()).get();
+		cpt.setInteret(rate);
+		return cpt;
+		
+	}
+	
+	@Override
+	public void AssignCompte(long compteid, long userid){
+		User u =CompteRepository.RetrieveUser(userid);
+		Compte c = CompteRepository.findById(compteid).get();
+		c.setUser(u);
+		CompteRepository.save(c);		
+	} 
+	
 }

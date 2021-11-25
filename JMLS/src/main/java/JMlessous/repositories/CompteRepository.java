@@ -12,8 +12,8 @@ import JMlessous.entities.*;
 @Repository
 public interface CompteRepository  extends JpaRepository<Compte,Long> {
 
-	//@Query("Select c from Compte c where c.users.id=:id")
-	//List<Compte> RetrieveActiveUserComptes(@Param("id")Long id);
+	@Query("Select c from Compte c where c.user.id=:id")
+	public List<Compte> RetrieveActiveUserComptes(@Param("id")Long id);
 	
 	@Query("Select c from Compte c where c.rib=:rib")
 	Compte FindByRib(@Param("rib")String rib);

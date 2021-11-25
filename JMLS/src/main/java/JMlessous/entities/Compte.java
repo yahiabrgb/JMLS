@@ -32,9 +32,15 @@ public class Compte implements Serializable{
 	@Column(name="Solde_Disponible")
 	private float soldedisponible;
 		
+	@Column(name="Interet")
+	private float interet;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="Date_de_creation")
 	private Date datedecreation;
+	
+	@Column(name="Type", unique = true)
+	private String type;
 	
 	@Column(name="Devise", unique = true)
 	private String devise;
@@ -53,6 +59,35 @@ public class Compte implements Serializable{
 	
 	public Long getIdcompte() {
 		return idcompte;
+	}
+	
+	public Compte(Long idcompte, float soldeactuel, float soldedisponible, float interet, Date datedecreation,
+			String type, String devise, String rib, Boolean etat) {
+		super();
+		this.idcompte = idcompte;
+		this.soldeactuel = soldeactuel;
+		this.soldedisponible = soldedisponible;
+		this.interet = interet;
+		this.datedecreation = datedecreation;
+		this.type = type;
+		this.devise = devise;
+		this.rib = rib;
+		this.etat = etat;
+	}
+
+	public Compte(Long idcompte, float soldeactuel, float soldedisponible, float interet, Date datedecreation,
+			String type, String devise, String rib, Boolean etat, User user) {
+		super();
+		this.idcompte = idcompte;
+		this.soldeactuel = soldeactuel;
+		this.soldedisponible = soldedisponible;
+		this.interet = interet;
+		this.datedecreation = datedecreation;
+		this.type = type;
+		this.devise = devise;
+		this.rib = rib;
+		this.etat = etat;
+		this.user = user;
 	}
 
 	public void setIdcompte(Long idcompte) {
@@ -79,6 +114,14 @@ public class Compte implements Serializable{
 		return datedecreation;
 	}
 
+	public float getInteret() {
+		return interet;
+	}
+
+	public void setInteret(float interet) {
+		this.interet = interet;
+	}
+
 	public void setDatedecreation(Date datedecreation) {
 		this.datedecreation = datedecreation;
 	}
@@ -86,6 +129,14 @@ public class Compte implements Serializable{
 
 	public String getDevise() {
 		return devise;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setDevise(String devise) {
@@ -143,6 +194,5 @@ public class Compte implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+		
 }
