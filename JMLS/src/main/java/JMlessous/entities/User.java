@@ -41,23 +41,20 @@ public class User implements Serializable {
 	@Column(name="First_name")
 	private String firstname;
 	
-	@NotBlank
 	@Size(max = 20)
 	@Column(name="Last_name")
 	private String lastname;
 	
-	@NotBlank
+
 	@Temporal(TemporalType.DATE)
 	@Column(name="Birthdate")
 	private Date birthdate;
 	
-	@NotBlank
-	@Size(max = 8)
+
 	@Column(name="CIN",unique=true)
 	private int cin;
 	
-	@NotBlank
-	@Size(max = 13)
+
 	@Column(name="Phone_Number",unique=true)
 	private int phonenumber;
 	
