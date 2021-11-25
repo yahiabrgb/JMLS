@@ -36,7 +36,7 @@ public class User implements Serializable {
 	@Column(name="Password")
 	private String password;
 	
-	@NotBlank
+
 	@Size(max = 20)
 	@Column(name="First_name")
 	private String firstname;
