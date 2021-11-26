@@ -3,11 +3,13 @@ package JMlessous.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,6 +20,7 @@ import javax.validation.constraints.Size;
 		})
 public class User implements Serializable {
 	@Id
+	@Column(name="IdUser")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -35,26 +38,30 @@ public class User implements Serializable {
 	@Size(max = 120)
 	@Column(name="Password")
 	private String password;
-	
-
+		
 	@Size(max = 20)
 	@Column(name="First_name")
 	private String firstname;
-	
+		
 	@Size(max = 20)
 	@Column(name="Last_name")
 	private String lastname;
 	
-
+	@Size(max = 20)
+	@Column(name="Résidence")
+	private String residence;
+	
+	@Size(max = 20)
+	@Column(name="Etat_Civile")
+	private String etatcivile;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="Birthdate")
 	private Date birthdate;
-	
-
+			
 	@Column(name="CIN",unique=true)
 	private int cin;
 	
-
 	@Column(name="Phone_Number",unique=true)
 	private int phonenumber;
 	
@@ -67,12 +74,63 @@ public class User implements Serializable {
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private List<Compte> comptes;
+	
 	public User() {
+		super();
 	}
 
 	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
+		this.password = password;
+	}
+	
+	public User(Long id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password, @Size(max = 20) String firstname,
+			@Size(max = 20) String lastname, @Size(max = 20) String residence, @Size(max = 20) String etatcivile,
+			Date birthdate, int cin, int phonenumber, float salary, Set<Role> roles, List<Compte> comptes) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.residence = residence;
+		this.etatcivile = etatcivile;
+		this.birthdate = birthdate;
+		this.cin = cin;
+		this.phonenumber = phonenumber;
+		this.salary = salary;
+		this.roles = roles;
+		this.comptes = comptes;
+	}
+	
+	public User(Long id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
+			@NotBlank @Size(max = 120) String password, @Size(max = 20) String firstname,
+			@Size(max = 20) String lastname, @Size(max = 20) String residence, @Size(max = 20) String etatcivile,
+			Date birthdate, int cin, int phonenumber, float salary) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.residence = residence;
+		this.etatcivile = etatcivile;
+		this.birthdate = birthdate;
+		this.cin = cin;
+		this.phonenumber = phonenumber;
+		this.salary = salary;
+	}
+
+	public User(Long id, @NotBlank @Size(max = 120) String password) {
+		super();
+		this.id = id;
 		this.password = password;
 	}
 
@@ -122,6 +180,30 @@ public class User implements Serializable {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	public String getResidence() {
+		return residence;
+	}
+
+	public void setResidence(String residence) {
+		this.residence = residence;
+	}
+
+	public String getEtatcivile() {
+		return etatcivile;
+	}
+
+	public void setEtatcivile(String etatcivile) {
+		this.etatcivile = etatcivile;
+	}
+
+	public List<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(List<Compte> comptes) {
+		this.comptes = comptes;
 	}
 
 	public Date getBirthdate() {
