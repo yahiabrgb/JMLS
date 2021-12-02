@@ -9,8 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
@@ -70,7 +68,7 @@ public class User implements Serializable {
 	@Column(name="Salary")
 	private float salary;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
 	@JoinTable(	name = "user_roles", 
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -80,7 +78,6 @@ public class User implements Serializable {
 	@JsonIgnore
 	private List<Compte> comptes;
 	
-	@JsonCreator
 	public User() {
 		super();
 	}
