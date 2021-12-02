@@ -15,9 +15,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import JMlessous.entities.ERole;
@@ -125,5 +128,14 @@ public class AuthController {
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
+	
+	@PutMapping("/pwupdate/{username}/{password}")
+	@ResponseBody
+	public User updatePassword(@PathVariable("password") String password,@PathVariable("username") String username){
+		User u=userRepository.findByUsername(username).get();
+		u.setPassword(encoder.encode(password));
+		userRepository.save(u);
+	return u;
 	}
 }

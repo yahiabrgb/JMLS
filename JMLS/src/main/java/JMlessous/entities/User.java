@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
@@ -78,6 +80,7 @@ public class User implements Serializable {
 	@JsonIgnore
 	private List<Compte> comptes;
 	
+	@JsonCreator
 	public User() {
 		super();
 	}
