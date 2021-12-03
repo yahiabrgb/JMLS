@@ -39,19 +39,15 @@ public class User implements Serializable {
 	@Column(name="Password")
 	private String password;
 		
-	@Size(max = 20)
 	@Column(name="First_name")
 	private String firstname;
 		
-	@Size(max = 20)
 	@Column(name="Last_name")
 	private String lastname;
 	
-	@Size(max = 20)
 	@Column(name="Résidence")
 	private String residence;
 	
-	@Size(max = 20)
 	@Column(name="Etat_Civile")
 	private String etatcivile;
 	
