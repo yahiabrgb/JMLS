@@ -85,8 +85,8 @@ public class User implements Serializable {
 	}
 	
 	public User(Long id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
-			@NotBlank @Size(max = 120) String password, @Size(max = 20) String firstname,
-			@Size(max = 20) String lastname, @Size(max = 20) String residence, @Size(max = 20) String etatcivile,
+			@NotBlank @Size(max = 120) String password,String firstname,
+			String lastname,String residence,String etatcivile,
 			Date birthdate, int cin, int phonenumber, float salary, Set<Role> roles, List<Compte> comptes) {
 		super();
 		this.id = id;
@@ -106,8 +106,8 @@ public class User implements Serializable {
 	}
 	
 	public User(Long id, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email,
-			@NotBlank @Size(max = 120) String password, @Size(max = 20) String firstname,
-			@Size(max = 20) String lastname, @Size(max = 20) String residence, @Size(max = 20) String etatcivile,
+			@NotBlank @Size(max = 120) String password,String firstname,
+			String lastname,String residence,String etatcivile,
 			Date birthdate, int cin, int phonenumber, float salary) {
 		super();
 		this.id = id;
