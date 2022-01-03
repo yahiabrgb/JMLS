@@ -16,20 +16,20 @@ public class Transaction implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
 
-	@NotBlank
+	
 	private Double montant;
 
 	private String emetteur;
 
 	private String receveur;
 	
-	@NotBlank
+	
 	private Date date;
 	
-	@NotBlank
+	
 	private Time heure;
 	
-	@NotBlank
+	
 	private String type;
 
 	private Double solde_rec;
@@ -108,8 +108,8 @@ public class Transaction implements Serializable {
 		this.solde_em = solde_em;
 	}
 
-	public Transaction(Long numero, @NotBlank Double montant, String emetteur, String receveur, @NotBlank Date date,
-			@NotBlank Time heure, @NotBlank String type, Double solde_rec, Double solde_em) {
+	public Transaction(Long numero,  Double montant, String emetteur, String receveur,  Date date,
+			 Time heure,  String type, Double solde_rec, Double solde_em) {
 		super();
 		this.numero = numero;
 		this.montant = montant;
