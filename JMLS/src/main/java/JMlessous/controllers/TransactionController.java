@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,10 +23,12 @@ import JMlessous.repositories.*;
 @CrossOrigin (origins="http://localhost:4200")
 public class TransactionController {
 
+
 	@Autowired
 	TransactionService transactionservice;
 	@Autowired
 	DeviseService ds;
+	@Autowired
 DeviseRepository dr;
 	TransactionRepository transactionrepository;
 	
@@ -65,7 +68,7 @@ DeviseRepository dr;
 		public Transaction addTrans(@RequestBody Transaction d) {
 		 return transactionservice.addTransaction(d);}
 		
-		 @GetMapping("/Retrievedevise")
+		 @GetMapping("/RetrieTransaction")
 		 @ResponseBody
 		  public List<Transaction> RetrieveTransaction(){
 		 List<Transaction> list = transactionservice.RetrieveallTransactions();
@@ -74,7 +77,29 @@ DeviseRepository dr;
 		 @GetMapping("/Retrievealldevise")
 		 @ResponseBody
 		  public List<Devise> RetrieveallDevise(){
-		 List<Devise> list = ds.RetrieveallDevise();
+		 List<Devise> list = dr.RetrieveDevise();
 		  return list;}	
 		 
+
+		 @PostMapping("/importdevise")
+		  @ResponseBody
+		  public String importFromExcel() {
+			 ExcelImporter ex = new ExcelImporter();
+			 List<Devise> listDevise = ex.excelImport();
+			 dr.saveAll(listDevise);
+			 return "Import Successfully";
+		 }
+		 
+		 @GetMapping("/TNDtoDevise/{somme}")
+		  @ResponseBody
+		  public double TNDtoDevise(@PathVariable("somme") double s,@RequestBody Devise d) {
+			 return ds.TNDtoDevise(d, s);
+		 }
+		 
+		 @GetMapping("/DevisetoTND/{somme}")
+		  @ResponseBody
+		  public double DevisetoTND(@PathVariable("somme") double s,@RequestBody Devise d) {
+			 return ds.DevisetoTND(d, s);
+		 }
+		
 }

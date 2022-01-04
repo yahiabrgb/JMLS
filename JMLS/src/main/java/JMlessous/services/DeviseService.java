@@ -27,6 +27,15 @@ public class DeviseService implements IDeviseService {
 	public List<Devise> RetrieveallDevise() {
 		return deviseRepository.findAll();
 	}
-		
+	
+	@Override
+	public double DevisetoTND(Devise d,double somme) {
+		return d.getAchat()*somme;
+	}
+
+	@Override
+	public double TNDtoDevise(Devise d,double somme) {
+		return somme/d.getVente();
+	}
 
 }

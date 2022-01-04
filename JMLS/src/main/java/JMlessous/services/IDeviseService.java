@@ -10,6 +10,10 @@ public interface IDeviseService {
 
 	List<Devise> RetrieveallDevise();
 
+	double DevisetoTND(Devise d, double somme);
+
+	double TNDtoDevise(Devise d, double somme);
+
 	//void AjouterDevise();
 
 }
