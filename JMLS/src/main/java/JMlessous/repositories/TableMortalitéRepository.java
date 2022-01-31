@@ -1,8 +1,11 @@
 package JMlessous.repositories;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-public interface TableMortalitéRepository {
+import JMlessous.entities.TableMortalité;
+
+public interface TableMortalitéRepository extends CrudRepository<TableMortalité, Long>{
 	@Query("select t.Tv_99 from TableMortalité t where t.x = ?1 ") //LIMIT 1
 	float findBySurvivantsLx(int ageClient);
 

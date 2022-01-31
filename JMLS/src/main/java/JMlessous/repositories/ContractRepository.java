@@ -46,21 +46,7 @@ public interface ContractRepository extends CrudRepository<Contract,Long> {
 	@Query("Select count(*) from Contract")
 	public int CountContracts();
 	
-	@Query("select count(s.user.id) from sinister s "
-			+ " join Contract c"
-			+ " on s.user.id = c.user.id "
-			+ " where  c.user.id=:id "
-			+ " and s.typeSinistre = 'Vie' "
-			+ " and c.Type = 'Vie' ")
-	public int SinistersPerContractVie (@Param("id")long id); 
-	
-	@Query("select count(s.user.id) from sinister s"
-			+ " join Contract c"
-			+ " on s.user.id = c.user.id"
-			+ " where  c.user.id=:id"
-			+ " and s.typeSinistre like 'Rente' "
-			+ " and c.Type like 'Rente' ")
-	public int SinistersPerContractRente (@Param("id")long id); 
+
 	
 	@Query("Select count(*) from Contract c where c.user.id=:id and c.Type=:type")
 	public int CountContractsByIdAndType(@Param("id")long id,@Param("type")ContractType type);
@@ -91,10 +77,10 @@ public interface ContractRepository extends CrudRepository<Contract,Long> {
 	@Query("Select c from Contract c where c.Type=:type ")
 	public Contract retrieveContractsbytype2(@Param("type")ContractType type);
 
-	@Query("Select u from USER u")
+	@Query("Select u from User u")
 	public List<User> retrieveallusers();
 	
-	@Query("Select u from USER u where u.id=:id")
+	@Query("Select u from User u where u.id=:id")
 	public User retrieveUser(@Param("id")Long id);
 	
 	/*@Query("select c from Contract c order by c.duration desc")
@@ -105,7 +91,6 @@ public interface ContractRepository extends CrudRepository<Contract,Long> {
 	    public Contract findContrat2();
 	   @Query("select c from Contract c WHERE c.Type = 'TemporairedecesEmprunteur' ")
 	    public Contract findContrat3();
-	   @Query("select c from Contract c  JOIN c.user u Join u.sinisterList l where l.typeSinistre ='casDecesperiodique' AND c.Type = 'casDecesperiodique' AND u.id=:id ")
-	    public Contract findContrat4(@Param("id")long id);
+
 
 }

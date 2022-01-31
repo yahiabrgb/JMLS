@@ -196,7 +196,7 @@ public class Contract implements Serializable {
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "USER_ID",referencedColumnName="USER_ID")
+	@JoinColumn(name = "IdUser",referencedColumnName="IdUser")
 	 private User user;
 	
 	/*

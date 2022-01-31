@@ -1,6 +1,6 @@
 package JMlessous.entities;
 
 public enum ContractType {
-	VieEntiere , TemporairedecesEmprunteur , casDeces , casDecesperiodique ,Personne, Dommages, Décès, Vie, Rente, Mixte
+	VieEntiere , TemporairedecesEmprunteur , casDeces , casDecesperiodique ,Personne, Dommages, Décès, Vie, NonVie, Rente, Mixte
 
 }
