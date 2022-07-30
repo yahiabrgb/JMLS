@@ -50,6 +50,9 @@ public interface ContractRepository extends CrudRepository<Contract,Long> {
 	
 	@Query("Select count(*) from Contract c where c.user.id=:id and c.Type=:type")
 	public int CountContractsByIdAndType(@Param("id")long id,@Param("type")ContractType type);
+	
+	@Query("Select count(*) from Contract c where  c.Type=:type")
+	public int CountContractsByType(@Param("type")ContractType type);
 
 	@Modifying
 	@Transactional

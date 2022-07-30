@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import JMlessous.entities.Contract;
+import JMlessous.entities.ContractType;
 import JMlessous.entities.User;
 import JMlessous.services.IContractService;
 import JMlessous.services.IUserService;
@@ -31,7 +32,7 @@ public class ContractController {
 	
 
 	
-	  @PreAuthorize("hasRole('ROLE_ADMIN')")
+	  
 	  @GetMapping("/retrieveAllContracts")
 	  @ResponseBody
 	  public List<Contract> getContract() {
@@ -52,14 +53,14 @@ public class ContractController {
 	  
 
 	  
-	  @PreAuthorize("hasRole('ROLE_ADMIN')") 
+	  
 	  @DeleteMapping("/DeleteExpiredContracts")
 	  @ResponseBody
 	  public void DeleteExpiredContracts(){
 		   ic.DeleteExpiredContracts();
 	  }
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
 		@DeleteMapping("/DeleteContractsByUserId/{id}")
 		@ResponseBody
 		public void DeleteContractsByUserID(@PathVariable("id")long id){
@@ -67,7 +68,7 @@ public class ContractController {
 			
 		}
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+	
 		@PostMapping("/addContract")
 		@ResponseBody	
 		public Contract addContract(@RequestBody Contract c) {
@@ -84,7 +85,7 @@ public class ContractController {
 				  return c;
 				  }	
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
 		@GetMapping("/ShowNotApprovedContracts")
 		@ResponseBody
 		public List<Contract> ShowNotApprovedContracts(){
@@ -92,7 +93,7 @@ public class ContractController {
 				  return c;
 				  }	
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
 		@PutMapping("/ApproveContract/{cntid}")
 		@ResponseBody
 		public void ApproveContract(@PathVariable("cntid")long cntid){
@@ -100,7 +101,7 @@ public class ContractController {
 		}
 		
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+	
 		@PutMapping("/ContractToUser/{idcnt}/{iduser}")
 		@ResponseBody
 		public void ContractToUser(@PathVariable("iduser")long iduser,@PathVariable("idcnt")long idcnt)
@@ -109,7 +110,7 @@ public class ContractController {
 		}
 		
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
 		@DeleteMapping("/deletecontract/{idcontract}")
 		@ResponseBody
 		public void removeContract(@PathVariable("idcontract") Long idcontract) {
@@ -123,7 +124,7 @@ public class ContractController {
 		}
 		
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+
 		@GetMapping("/TotalPricing")
 		@ResponseBody
 		public float TotalPricing(){
@@ -132,7 +133,7 @@ public class ContractController {
 			return total;
 		}
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
 		@GetMapping("/TotalCost")
 		@ResponseBody
 		public float TotalCost(){
@@ -154,7 +155,7 @@ public class ContractController {
 		}
 		
 		
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
 		@PutMapping(value = "/MAJcntduration/{cntid}/{duration}") 
 		@ResponseBody
 	    public void MAJContractDuration(@PathVariable("duration")int duration, @PathVariable("cntid")long cntid){
@@ -183,6 +184,13 @@ public class ContractController {
 		public float CapitalVieUnique (@PathVariable("C")float C,@PathVariable("duree") int duree , @PathVariable("t")double t ,@PathVariable("userid")long id){
 			
 			return ic.CapitalVieUnique(C, id, duree ,t);
+			
+		}
+		@GetMapping("/count/{type}")
+		@ResponseBody 
+		public int CountContracts (@PathVariable("type")ContractType type){
+			
+			return ic.CountContractsByType(type);
 			
 		}
 		

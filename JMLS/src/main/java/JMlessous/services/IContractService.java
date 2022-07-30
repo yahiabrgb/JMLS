@@ -28,7 +28,7 @@ public interface IContractService {
 	void DeleteContractsByUserId(long id);
 	int CountContracts();
 	void MAJContractDuration(int duration,long cntid);
-
+	int CountContractsByType(ContractType contype);
 	int CountContractsByIdAndType(long id, ContractType type);
 	void DeleteExpiredContracts();
 	void ApproveContract(long cntid);
@@ -43,6 +43,7 @@ public interface IContractService {
 	Contract addOrUpdateContract(Contract contract);
 	List<Contract> retrieveContractsbytype(ContractType type);
 	Contract retrieveContractsbytype2(ContractType type);
+	
 	List<User> retrieveallusers();
 	float CapitalVieUnique(float C, long userid, int duree,double taux);
 	Contract findContrat1();

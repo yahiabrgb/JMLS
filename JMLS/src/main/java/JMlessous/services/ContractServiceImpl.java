@@ -369,6 +369,12 @@ public class ContractServiceImpl implements IContractService {
 cnt = ContractRepository.save(contract);
 return cnt;
 	}
+	@Override
+	public int CountContractsByType(ContractType contype) {
+		int nmbr = 0; 
+		nmbr = ContractRepository.CountContractsByType(contype);
+		return nmbr;
+	}
 
 	@Override
 
